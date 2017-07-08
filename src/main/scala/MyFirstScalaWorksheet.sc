@@ -35,7 +35,7 @@ val t = println(1)
 
 object WhileTest {
   def main(): Unit = {
-    var sum = 0;
+    var sum = 0
     while (sum < 50) {
       println("Value of sum: " + sum)
       sum = sum + 25
@@ -48,7 +48,7 @@ WhileTest.main()
 
 object DoWhileTest {
   def main(): Unit = {
-    var sum = 0;
+    var sum = 0
     do {
       println("Value of sum: " + sum)
       sum = sum + 25
@@ -179,8 +179,8 @@ class Surgeon (
 
   def incrementSurgeonCount:Int =
   {
-    Surgeon.count_of_surgeons +=1;
-    return Surgeon.count_of_surgeons
+    Surgeon.count_of_surgeons +=1
+    Surgeon.count_of_surgeons
   }
 }
 
@@ -284,3 +284,24 @@ professionals.foreach(prof => println(prof.fullName + ": " + prof.selfIntroducti
 //by uncommenting
 
 //professionals.map(prof => prof.favoriteTool) ---this fails
+
+//Arguments in anonymous function
+
+val incrementOne: Int => Int = _ + 1
+val add2Numbers: (Int, Int) => Int = (_ + _ )
+
+incrementOne(6)
+add2Numbers(2,3)
+
+// Return keyword in Scala is optional and is error-prone should be avoided. It has no side-effects on anonymous funtions.
+def foo(x: Int): Int = {
+  val anonFunc: Int => Int = { z =>
+    if (z > 5)
+      return z // This line makes z the return value of foo!
+    else
+      z + 2    // This line is the return value of anonFunc
+  }
+  anonFunc(x)  // This line is the return value of foo
+}
+
+foo(5)

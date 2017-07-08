@@ -12,6 +12,29 @@ In Scala it is possible to have nested functions (functions within functions), a
         return [expr]
     }
 
+**_Arguments in anonymous function_**
+
+    val incrementOne: Int => Int = _ + 1
+    val add2Numbers: (Int, Int) => Int = (_ + _ )
+    
+    incrementOne(6) //output -> 7
+    add2Numbers(2,3) //output -> 5
+    
+
+**_Return keyword in Scala is optional and is error-prone; should be avoided. It has no side-effects on anonymous funtions._**
+
+    def foo(x: Int): Int = {
+      val anonFunc: Int => Int = { z =>
+        if (z > 5)
+          return z // This line makes z the return value of foo!
+        else
+          z + 2    // This line is the return value of anonFunc
+      }
+      anonFunc(x)  // This line is the return value of foo
+    }
+    
+    foo(5)
+
 **_Implicit classes_**
 
     object Helpers {
@@ -44,4 +67,4 @@ In Scala it is possible to have nested functions (functions within functions), a
     *  There may not be any method, member or object in scope with the same name as the implicit class.
 - Overriding classes must use the override modifier.
 - Super class constructors cannot be directly invoked by Auxiliary constructors. They only can invoke the primary constructor which, in turn, would invoke the Super class constructor.
-- 
+
